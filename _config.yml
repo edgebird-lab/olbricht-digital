@@ -1,0 +1,26 @@
+title: "Robin Olbricht"
+description: "Wirtschaftsinformatiker · Unternehmer · Entwickler"
+author:
+  name: "Robin Olbricht"
+  email: "kontakt@olbricht-digital.de"
+  github: "edgebird-lab"
+  linkedin: "robin-olbricht-789b5139a"
+
+url: "https://olbricht-digital.de"
+baseurl: ""
+
+lang: "de"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - node_modules/

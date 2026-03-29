@@ -1,0 +1,42 @@
+# ═══════════════════════════════════════════════
+# Netlify Build-Konfiguration
+# Robin Olbricht – olbricht-digital.de
+# ═══════════════════════════════════════════════
+
+[build]
+  command   = "bundle exec jekyll build"
+  publish   = "_site"
+
+[build.environment]
+  RUBY_VERSION = "3.2.2"
+  JEKYLL_ENV   = "production"
+
+# ── Netlify Identity & CMS ────────────────────
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Frame-Options        = "DENY"
+    X-XSS-Protection       = "1; mode=block"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://identity.netlify.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.netlify.com https://identity.netlify.com;"
+
+# ── Globale Security-Header ───────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
+
+# ── Redirects ─────────────────────────────────
+# Erzwingt HTTPS
+[[redirects]]
+  from   = "http://olbricht-digital.de/*"
+  to     = "https://olbricht-digital.de/:splat"
+  status = 301
+  force  = true
+
+# www → non-www
+[[redirects]]
+  from   = "https://www.olbricht-digital.de/*"
+  to     = "https://olbricht-digital.de/:splat"
+  status = 301
+  force  = true

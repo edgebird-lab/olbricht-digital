@@ -1,0 +1,145 @@
+# ═══════════════════════════════════════════════
+# Decap CMS (Netlify CMS) Konfiguration
+# Robin Olbricht – olbricht-digital.de
+#
+# Über dieses Interface können Inhalte der
+# Webseite direkt im Browser bearbeitet werden.
+# Erreichbar unter: https://olbricht-digital.de/admin
+# ═══════════════════════════════════════════════
+
+backend:
+  name: git-gateway
+  branch: main   # Dein Haupt-Branch auf GitHub
+
+# Mediendateien (z.B. Portrait-Foto hochladen)
+media_folder: "assets/img"
+public_folder: "/assets/img"
+
+# Sprache des CMS-Interfaces
+locale: "de"
+
+# ── COLLECTIONS ───────────────────────────────
+# Jede Collection ist ein bearbeitbarer Bereich
+# der Webseite.
+
+collections:
+
+  # ── 1. Persönliche Infos (Über mich, Hero) ──
+  - name: "einstellungen"
+    label: "⚙️  Persönliche Infos"
+    files:
+
+      - name: "profil"
+        label: "Profil & Hero-Bereich"
+        file: "_data/profil.yml"
+        fields:
+          - { label: "Vorname",          name: "vorname",      widget: "string" }
+          - { label: "Nachname",         name: "nachname",     widget: "string" }
+          - { label: "Alter",            name: "alter",        widget: "number" }
+          - { label: "Berufsbezeichnung (Hero-Untertitel)", name: "subtitle", widget: "string",
+              hint: "z.B. Wirtschaftsinformatiker · Gründer · Entwickler" }
+          - { label: "Kurzbeschreibung (Hero-Text)",        name: "hero_desc", widget: "text" }
+          - { label: "Portrait-Foto",    name: "portrait",     widget: "image",
+              required: false, hint: "Empfehlung: quadratisches Foto, mind. 400×400px" }
+          - { label: "E-Mail",           name: "email",        widget: "string" }
+          - { label: "Firmen-Website",   name: "website",      widget: "string" }
+          - { label: "GitHub-URL",       name: "github",       widget: "string" }
+          - { label: "LinkedIn-URL",     name: "linkedin",     widget: "string" }
+          - { label: "YouTube-URL",      name: "youtube",      widget: "string", required: false }
+
+      - name: "verfuegbarkeit"
+        label: "Verfügbarkeit (grüner Badge im Hero)"
+        file: "_data/verfuegbarkeit.yml"
+        fields:
+          - label: "Status"
+            name: "status"
+            widget: "select"
+            options:
+              - { label: "✅  Verfügbar für Projekte",    value: "verfuegbar" }
+              - { label: "⏳  Begrenzt verfügbar",        value: "begrenzt" }
+              - { label: "❌  Aktuell nicht verfügbar",   value: "nicht_verfuegbar" }
+          - { label: "Badge-Text (wird im Hero angezeigt)", name: "text", widget: "string",
+              hint: "z.B. Verfügbar für Projekte" }
+
+  # ── 2. Lebenslauf / Timeline ─────────────────
+  - name: "lebenslauf"
+    label: "📋  Lebenslauf"
+    label_singular: "Station"
+    folder: "_data/stationen"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "titel"
+    summary: "{{zeitraum}} – {{titel}}"
+    fields:
+      - { label: "Titel der Station",   name: "titel",     widget: "string",
+          hint: "z.B. Studium Wirtschaftsinformatik · HS Schmalkalden" }
+      - { label: "Zeitraum",            name: "zeitraum",  widget: "string",
+          hint: "z.B. 2023 – heute oder 2014 – 2022 · 8 Jahre" }
+      - { label: "Beschreibung",        name: "beschreibung", widget: "text" }
+      - { label: "Aktuell (gelber Punkt in Timeline)", name: "aktuell",
+          widget: "boolean", default: false }
+      - label: "Schlagworte (Tags)"
+        name: "tags"
+        widget: "list"
+        required: false
+        hint: "z.B. SQL, Java, Logistik – durch Komma getrennt eingeben"
+      - { label: "Reihenfolge (1 = oben)",  name: "reihenfolge", widget: "number", default: 99 }
+
+  # ── 3. Leistungen ────────────────────────────
+  - name: "leistungen"
+    label: "🛠️  Leistungen"
+    label_singular: "Leistung"
+    folder: "_data/leistungen"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "titel"
+    fields:
+      - { label: "Titel",         name: "titel",       widget: "string" }
+      - { label: "Beschreibung",  name: "beschreibung", widget: "text" }
+      - { label: "Hervorgehoben (größere Karte)", name: "featured",
+          widget: "boolean", default: false }
+      - label: "Features (Aufzählungspunkte)"
+        name: "features"
+        widget: "list"
+        required: false
+      - { label: "Reihenfolge",   name: "reihenfolge", widget: "number", default: 99 }
+
+  # ── 4. Aktuelles ─────────────────────────────
+  - name: "aktuelles"
+    label: "🔔  Aktuelles"
+    label_singular: "Projekt / Aktivität"
+    folder: "_data/aktuelles"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "titel"
+    fields:
+      - { label: "Titel",   name: "titel",  widget: "string" }
+      - { label: "Status",  name: "status", widget: "select",
+          options: ["In Produktion", "Im Aufbau", "Laufend", "Abgeschlossen", "Geplant"] }
+      - { label: "Kategorie", name: "kategorie", widget: "select",
+          options:
+            - { label: "YouTube",    value: "yt" }
+            - { label: "Entwicklung", value: "build" }
+            - { label: "Studium",    value: "study" }
+            - { label: "Sonstiges",  value: "other" } }
+      - { label: "Beschreibung", name: "beschreibung", widget: "text" }
+      - { label: "Link-Text",    name: "link_text",    widget: "string", required: false,
+          hint: "z.B. Zum Kanal →" }
+      - { label: "Link-URL",     name: "link_url",     widget: "string", required: false }
+      - { label: "Reihenfolge",  name: "reihenfolge",  widget: "number", default: 99 }
+
+  # ── 5. Impressum & Datenschutz ───────────────
+  - name: "rechtliches"
+    label: "⚖️  Rechtliches"
+    files:
+
+      - name: "impressum"
+        label: "Impressum"
+        file: "_data/impressum.yml"
+        fields:
+          - { label: "Name",            name: "name",     widget: "string" }
+          - { label: "Straße / Nr.",    name: "strasse",  widget: "string" }
+          - { label: "PLZ + Ort",       name: "ort",      widget: "string" }
+          - { label: "E-Mail",          name: "email",    widget: "string" }
+          - { label: "USt-IdNr.",       name: "ust",      widget: "string", required: false,
+              hint: "Wird nach Finanzamt-Eintragung ergänzt" }
