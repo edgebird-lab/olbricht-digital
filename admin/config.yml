@@ -67,6 +67,8 @@ collections:
     label_singular: "Station"
     folder: "_data/stationen"
     create: true
+    extension: yml
+    format: yml
     slug: "{{slug}}"
     identifier_field: "titel"
     summary: "{{zeitraum}} – {{titel}}"
@@ -91,6 +93,8 @@ collections:
     label_singular: "Leistung"
     folder: "_data/leistungen"
     create: true
+    extension: yml
+    format: yml
     slug: "{{slug}}"
     identifier_field: "titel"
     fields:
@@ -110,6 +114,8 @@ collections:
     label_singular: "Projekt / Aktivität"
     folder: "_data/aktuelles"
     create: true
+    extension: yml
+    format: yml
     slug: "{{slug}}"
     identifier_field: "titel"
     fields:
