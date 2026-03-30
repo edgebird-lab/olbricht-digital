@@ -1,0 +1,9 @@
+name: "Robin Olbricht"
+strasse: "Thomas-Mann-Str. 2b"
+ort: "98574 Schmalkalden"
+land: "Deutschland"
+email: "kontakt@olbricht-digital.de"
+ust: ""
+
+datenschutz_hosting: "Diese Webseite wird über Netlify/GitHub Pages gehostet. Es gelten die Datenschutzbestimmungen des jeweiligen Anbieters."
+datenschutz_formular: "Das Kontaktformular wird über Formspree verarbeitet. Bitte beachten Sie die Datenschutzerklärung von Formspree unter formspree.io."

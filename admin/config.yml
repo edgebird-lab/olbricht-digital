@@ -27,6 +27,7 @@ collections:
   # ── 1. Persönliche Infos (Über mich, Hero) ──
   - name: "einstellungen"
     label: "⚙️  Persönliche Infos"
+    format: yml
     files:
 
       - name: "profil"
@@ -38,7 +39,7 @@ collections:
           - { label: "Alter",            name: "alter",        widget: "number" }
           - { label: "Berufsbezeichnung (Hero-Untertitel)", name: "subtitle", widget: "string",
               hint: "z.B. Wirtschaftsinformatiker · Gründer · Entwickler" }
-          - { label: "Kurzbeschreibung (Hero-Text)",        name: "hero_desc", widget: "text" }
+          - { label: "Kurzbeschreibung (Hero-Text)", name: "hero_desc", widget: "text" }
           - { label: "Portrait-Foto",    name: "portrait",     widget: "image",
               required: false, hint: "Empfehlung: quadratisches Foto, mind. 400×400px" }
           - { label: "E-Mail",           name: "email",        widget: "string" }
@@ -46,19 +47,32 @@ collections:
           - { label: "GitHub-URL",       name: "github",       widget: "string" }
           - { label: "LinkedIn-URL",     name: "linkedin",     widget: "string" }
           - { label: "YouTube-URL",      name: "youtube",      widget: "string", required: false }
+          - label: "Tech-Stack (Chips im Hero)"
+            name: "tech_stack"
+            widget: "list"
+            hint: "z.B. SQL, Java, PostgreSQL"
+          - { label: "Über mich – Einleitungssatz", name: "about_lead", widget: "text" }
+          - { label: "Über mich – zweiter Absatz",  name: "about_text", widget: "text" }
+          - label: "Fakten (Zahlen unter dem Portrait)"
+            name: "fakten"
+            widget: "list"
+            fields:
+              - { label: "Wert",        name: "wert",         widget: "string", hint: "z.B. 8 oder Abi" }
+              - { label: "Einheit",     name: "einheit",      widget: "string", hint: "z.B. Jahre oder Gut" }
+              - { label: "Beschreibung", name: "beschreibung", widget: "string" }
 
       - name: "verfuegbarkeit"
-        label: "Verfügbarkeit (grüner Badge im Hero)"
+        label: "Verfügbarkeit (Badge im Hero)"
         file: "_data/verfuegbarkeit.yml"
         fields:
           - label: "Status"
             name: "status"
             widget: "select"
             options:
-              - { label: "✅  Verfügbar für Projekte",    value: "verfuegbar" }
-              - { label: "⏳  Begrenzt verfügbar",        value: "begrenzt" }
-              - { label: "❌  Aktuell nicht verfügbar",   value: "nicht_verfuegbar" }
-          - { label: "Badge-Text (wird im Hero angezeigt)", name: "text", widget: "string",
+              - { label: "✅  Verfügbar für Projekte",  value: "verfuegbar" }
+              - { label: "⏳  Begrenzt verfügbar",      value: "begrenzt" }
+              - { label: "❌  Aktuell nicht verfügbar", value: "nicht_verfuegbar" }
+          - { label: "Badge-Text (wird angezeigt)", name: "text", widget: "string",
               hint: "z.B. Verfügbar für Projekte" }
 
   # ── 2. Lebenslauf / Timeline ─────────────────
@@ -139,15 +153,21 @@ collections:
   # ── 5. Impressum & Datenschutz ───────────────
   - name: "rechtliches"
     label: "⚖️  Rechtliches"
+    format: yml
     files:
 
       - name: "impressum"
-        label: "Impressum"
+        label: "Impressum & Datenschutz"
         file: "_data/impressum.yml"
         fields:
-          - { label: "Name",            name: "name",     widget: "string" }
-          - { label: "Straße / Nr.",    name: "strasse",  widget: "string" }
-          - { label: "PLZ + Ort",       name: "ort",      widget: "string" }
-          - { label: "E-Mail",          name: "email",    widget: "string" }
-          - { label: "USt-IdNr.",       name: "ust",      widget: "string", required: false,
+          - { label: "Name",           name: "name",     widget: "string" }
+          - { label: "Straße / Nr.",   name: "strasse",  widget: "string" }
+          - { label: "PLZ + Ort",      name: "ort",      widget: "string" }
+          - { label: "Land",           name: "land",     widget: "string" }
+          - { label: "E-Mail",         name: "email",    widget: "string" }
+          - { label: "USt-IdNr.",      name: "ust",      widget: "string", required: false,
               hint: "Wird nach Finanzamt-Eintragung ergänzt" }
+          - { label: "Datenschutz – Hosting-Text",   name: "datenschutz_hosting",  widget: "text",
+              hint: "Beschreibung des Hostings auf der Datenschutzseite" }
+          - { label: "Datenschutz – Formular-Text",  name: "datenschutz_formular", widget: "text",
+              hint: "Hinweis zum Kontaktformular auf der Datenschutzseite" }

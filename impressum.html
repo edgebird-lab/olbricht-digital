@@ -3,6 +3,7 @@ layout: default
 title: "Impressum – Robin Olbricht"
 description: "Impressum und rechtliche Informationen"
 ---
+{% assign i = site.data.impressum %}
 <section class="section" style="min-height: 80vh; padding-top: 10rem;">
   <div class="container" style="max-width: 700px;">
     <div class="section-header">
@@ -12,19 +13,23 @@ description: "Impressum und rechtliche Informationen"
     <div style="color: var(--text-muted); line-height: 1.9;">
       <h3 style="margin-bottom: 0.5rem;">Angaben gemäß § 5 TMG</h3>
       <p>
-        Robin Olbricht<br />
-        Thomas-Mann-Str. 2b<br />
-        98574 Schmalkalden<br />
-        Deutschland
+        {{ i.name }}<br />
+        {{ i.strasse }}<br />
+        {{ i.ort }}<br />
+        {{ i.land }}
       </p>
       <h3 style="margin: 2rem 0 0.5rem;">Kontakt</h3>
       <p>
-        E-Mail: <a href="mailto:kontakt@olbricht-digital.de" style="color: var(--amber);">kontakt@olbricht-digital.de</a>
+        E-Mail: <a href="mailto:{{ i.email }}" style="color: var(--amber);">{{ i.email }}</a>
       </p>
       <h3 style="margin: 2rem 0 0.5rem;">Umsatzsteuer-ID</h3>
-      <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: [Wird ergänzt nach Eintragung]</p>
+      {% if i.ust and i.ust != "" %}
+      <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: {{ i.ust }}</p>
+      {% else %}
+      <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: Wird nach Eintragung ergänzt.</p>
+      {% endif %}
       <h3 style="margin: 2rem 0 0.5rem;">Verantwortlich für den Inhalt</h3>
-      <p>Robin Olbricht (Anschrift wie oben)</p>
+      <p>{{ i.name }} (Anschrift wie oben)</p>
       <p style="margin-top: 3rem; font-size: 0.85rem;">
         <a href="/" style="color: var(--amber);">← Zurück zur Startseite</a>
       </p>

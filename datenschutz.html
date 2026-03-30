@@ -3,6 +3,7 @@ layout: default
 title: "Datenschutz – Robin Olbricht"
 description: "Datenschutzerklärung"
 ---
+{% assign i = site.data.impressum %}
 <section class="section" style="min-height: 80vh; padding-top: 10rem;">
   <div class="container" style="max-width: 700px;">
     <div class="section-header">
@@ -12,15 +13,13 @@ description: "Datenschutzerklärung"
     <div style="color: var(--text-muted); line-height: 1.9;">
       <h3 style="margin-bottom: 0.5rem;">1. Datenschutz auf einen Blick</h3>
       <p>Diese Webseite erhebt keine personenbezogenen Daten über Tracking oder Analytics-Dienste.
-      Das Kontaktformular wird über Formspree verarbeitet. Bitte beachten Sie die Datenschutzerklärung
-      von Formspree unter <a href="https://formspree.io/legal/privacy-policy" target="_blank" style="color:var(--amber);">formspree.io</a>.</p>
+      {{ i.datenschutz_formular }}</p>
       <h3 style="margin: 2rem 0 0.5rem;">2. Hosting</h3>
-      <p>Diese Webseite wird über Netlify/GitHub Pages gehostet. Es gelten die Datenschutzbestimmungen
-      des jeweiligen Anbieters.</p>
+      <p>{{ i.datenschutz_hosting }}</p>
       <h3 style="margin: 2rem 0 0.5rem;">3. Ihre Rechte</h3>
       <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung,
       Datenübertragbarkeit und Widerspruch. Für Anfragen wenden Sie sich an:
-      <a href="mailto:kontakt@olbricht-digital.de" style="color:var(--amber);">kontakt@olbricht-digital.de</a></p>
+      <a href="mailto:{{ i.email }}" style="color:var(--amber);">{{ i.email }}</a></p>
       <p style="margin-top: 3rem; font-size: 0.85rem;">
         <a href="/" style="color: var(--amber);">← Zurück zur Startseite</a>
       </p>
