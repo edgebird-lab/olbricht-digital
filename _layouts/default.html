@@ -14,6 +14,121 @@
 
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
   {% seo %}
+
+  <!-- ═══════════════════════════════════════
+       Schema Markup – Strukturierte Daten
+       Sagt Google genau wer du bist und was
+       du machst → bessere Suchergebnisse
+  ════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://robin-olbricht.de/#person",
+        "name": "Robin Olbricht",
+        "givenName": "Robin",
+        "familyName": "Olbricht",
+        "birthDate": "1989",
+        "nationality": "DE",
+        "url": "https://robin-olbricht.de",
+        "email": "kontakt@olbricht-digital.de",
+        "image": "https://robin-olbricht.de/assets/img/portrait.jpg",
+        "sameAs": [
+          "https://github.com/edgebird-lab",
+          "https://www.linkedin.com/in/robin-olbricht-789b5139a/",
+          "https://youtube.com/@edgebird-lab",
+          "https://olbricht-digital.de"
+        ],
+        "jobTitle": "Wirtschaftsinformatiker & IT-Dienstleister",
+        "description": "Wirtschaftsinformatik-Student, Gründer und Entwickler aus Schmalkalden. Spezialisiert auf Jekyll-Webseiten, PostgreSQL-Schnittstellen und Open-Source-Lösungen für KMU.",
+        "knowsAbout": [
+          "Jekyll",
+          "Statische Webseiten",
+          "PostgreSQL",
+          "SQL",
+          "Java",
+          "JavaScript",
+          "Metabase",
+          "Netlify",
+          "Open Source",
+          "DSGVO",
+          "Buchhaltungsautomatisierung",
+          "Schnittstellenprogrammierung"
+        ],
+        "alumniOf": [
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "Hochschule Schmalkalden",
+            "url": "https://www.hs-schmalkalden.de"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Thomas-Mann-Str. 2b",
+          "postalCode": "98574",
+          "addressLocality": "Schmalkalden",
+          "addressRegion": "Thüringen",
+          "addressCountry": "DE"
+        }
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://robin-olbricht.de/#business",
+        "name": "Robin Olbricht – IT-Dienstleistungen",
+        "legalName": "Robin Olbricht",
+        "description": "Individuelle statische Webseiten mit Jekyll, PostgreSQL-Datenbankschnittstellen und Open-Source-BI-Lösungen für kleine und mittlere Unternehmen. DSGVO-konform, self-hosted.",
+        "url": "https://robin-olbricht.de",
+        "email": "kontakt@olbricht-digital.de",
+        "founder": { "@id": "https://robin-olbricht.de/#person" },
+        "employee": { "@id": "https://robin-olbricht.de/#person" },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Thomas-Mann-Str. 2b",
+          "postalCode": "98574",
+          "addressLocality": "Schmalkalden",
+          "addressRegion": "Thüringen",
+          "addressCountry": "DE"
+        },
+        "areaServed": [
+          {
+            "@type": "State",
+            "name": "Thüringen"
+          },
+          {
+            "@type": "Country",
+            "name": "Deutschland"
+          }
+        ],
+        "serviceType": [
+          "Webentwicklung",
+          "Jekyll-Webseiten",
+          "Datenbankentwicklung",
+          "PostgreSQL",
+          "Schnittstellenprogrammierung",
+          "Business Intelligence",
+          "Buchhaltungsautomatisierung"
+        ],
+        "priceRange": "€€",
+        "sameAs": [
+          "https://github.com/edgebird-lab",
+          "https://www.linkedin.com/in/robin-olbricht-789b5139a/",
+          "https://olbricht-digital.de"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://robin-olbricht.de/#website",
+        "url": "https://robin-olbricht.de",
+        "name": "Robin Olbricht",
+        "description": "Persönliche Website von Robin Olbricht – Wirtschaftsinformatiker, Gründer und IT-Entwickler aus Schmalkalden.",
+        "inLanguage": "de-DE",
+        "author": { "@id": "https://robin-olbricht.de/#person" }
+      }
+    ]
+  }
+  </script>
   <!-- Netlify Identity: ermöglicht CMS-Login -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
