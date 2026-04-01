@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Über Robin Olbricht – Wirtschaftsinformatik-Student, Gründer von Olbricht Digital, Schmalkalden." />
+  <title>Über mich – Olbricht Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    /* ── ABOUT-ONLY STYLES ── */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 6rem;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+      padding: 4rem 5vw 6rem;
+    }
+
+    /* Timeline */
+    .timeline { display: flex; flex-direction: column; }
+    .timeline-item {
+      display: flex;
+      gap: 1.5rem;
+      position: relative;
+    }
+    .timeline-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 19px; top: 42px;
+      width: 1px;
+      height: calc(100% - 10px);
+      background: var(--line);
+    }
+    .tl-dot {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      border: 1px solid var(--line);
+      background: var(--bg2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      margin-top: 2px;
+    }
+    .tl-body { padding-bottom: 2.5rem; }
+    .tl-period {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.2rem;
+    }
+    .tl-body h4 { margin-bottom: 0.3rem; }
+
+    /* Values */
+    .values-stack { display: flex; flex-direction: column; gap: 1rem; }
+    .value-row {
+      border: 1px solid var(--line);
+      padding: 1.5rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      background: var(--bg2);
+      transition: border-color 0.2s;
+    }
+    .value-row:hover { border-color: var(--accent); }
+    .value-emoji { font-size: 1.5rem; flex-shrink: 0; }
+    .value-row h4 { margin-bottom: 0.2rem; }
+
+    /* Skills bar */
+    .skills-section {
+      background: var(--bg2);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+    .skill-item {
+      background: var(--bg2);
+      padding: 1.5rem 2rem;
+      transition: background 0.2s;
+    }
+    .skill-item:hover { background: var(--bg3); }
+    .skill-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .skill-bar-track {
+      height: 3px;
+      background: var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .skill-bar-fill.animated { width: var(--w); }
+
+    /* CTA strip */
+    .about-cta {
+      padding: 5rem 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--line);
+    }
+    .about-cta p { font-size: 1.1rem; color: var(--muted); max-width: 480px; }
+    .about-cta-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .about-cta { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="index.html"><span>O</span>lbricht Digital</a>
+    <ul class="nav-links">
+      <li><a href="index.html#leistungen">Leistungen</a></li>
+      <li><a href="index.html#architektur">Lösungen</a></li>
+      <li><a href="about.html" class="active">Über mich</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <a class="nav-cta" href="kontakt.html">Kontakt</a>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero" style="position:relative;z-index:1;">
+    <div class="section-label">// Über mich</div>
+    <h1>Robin<br><span style="color:var(--accent)">Olbricht</span></h1>
+    <p>Wirtschaftsinformatik-Student, Gründer von Olbricht Digital mit Wurzeln in Handwerk, Logistik und Militär.</p>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="about-grid">
+
+    <!-- Timeline -->
+    <div>
+      <div class="section-label">// Werdegang</div>
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <div class="tl-dot">🎓</div>
+          <div class="tl-body">
+            <div class="tl-period">Aktuell</div>
+            <h4>Wirtschaftsinformatik</h4>
+            <p>Hochschule Schmalkalden – 2. Semester. Technisches und wirtschaftliches Fundament für moderne Softwareentwicklung.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-dot">📚</div>
+          <div class="tl-body">
+            <div class="tl-period">Zuvor</div>
+            <h4>Digital Business &amp; Produktinnovation</h4>
+            <p>2 Semester in Göttingen mit Fokus auf digitale Geschäftsmodelle und Innovation.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-dot">⚙️</div>
+          <div class="tl-body">
+            <div class="tl-period">Berufserfahrung</div>
+            <h4>CNC-Maschinenbediener &amp; Handwerk</h4>
+            <p>Ausbildung als Maler/Lackierer, anschließend CNC-Maschinenbedienung. Präzisionsdenken und prozessbasiertes Arbeiten aus der Praxis.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-dot">🪖</div>
+          <div class="tl-body">
+            <div class="tl-period">8 Jahre</div>
+            <h4>Logistiker &amp; Militärfahrer – Bundeswehr</h4>
+            <p>Disziplin, Struktur und Verantwortung in einem professionellen, operativen Umfeld über viele Jahre hinweg.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Values -->
+    <div>
+      <div class="section-label">// Werte &amp; Ansatz</div>
+      <div class="values-stack reveal">
+        <div class="value-row">
+          <div class="value-emoji">🔓</div>
+          <div>
+            <h4>Open Source aus Überzeugung</h4>
+            <p>Transparenz und Unabhängigkeit sind keine Features – sie sind Grundprinzipien. Kein Vendor Lock-in.</p>
+          </div>
+        </div>
+        <div class="value-row">
+          <div class="value-emoji">🏗️</div>
+          <div>
+            <h4>Strukturiert &amp; lösungsorientiert</h4>
+            <p>Komplexe Probleme systematisch angehen und durchdachte Lösungen liefern – keine Schnellschüsse.</p>
+          </div>
+        </div>
+        <div class="value-row">
+          <div class="value-emoji">🔧</div>
+          <div>
+            <h4>Praxisnah durch Erfahrung</h4>
+            <p>Handwerk, Militär, Industrie – ich verstehe operative Anforderungen jenseits des Schreibtisches.</p>
+          </div>
+        </div>
+        <div class="value-row">
+          <div class="value-emoji">📍</div>
+          <div>
+            <h4>Regional verwurzelt</h4>
+            <p>Schmalkalden · Suhl · Meiningen – persönliche Zusammenarbeit vor Ort ist möglich und erwünscht.</p>
+          </div>
+        </div>
+        <div class="value-row">
+          <div class="value-emoji">🐧</div>
+          <div>
+            <h4>Linux &amp; Self-Hosting</h4>
+            <p>Homelab, Pi-hole, Nextcloud – ich setze das, was ich empfehle, auch selbst produktiv ein.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <section class="skills-section">
+    <div style="padding: 4rem 5vw;">
+      <div class="section-label">// Technologien</div>
+      <h2>Tech Stack</h2>
+      <p class="section-intro">Die Technologien, mit denen ich täglich arbeite und auf die ich mich verlasse.</p>
+      <div class="skills-grid reveal">
+        <div class="skill-item">
+          <div class="skill-label">PostgreSQL</div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:90%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-label">Java / Spring Boot</div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:80%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-label">HTML / CSS / JS</div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:85%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-label">Astro Framework</div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:75%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-label">Linux / Shell</div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:80%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-label">Metabase / BI</div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:70%"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="about-cta">
+    <div>
+      <div class="section-label">// Zusammenarbeiten</div>
+      <p>Sie haben ein Projekt, das zu meinem Profil passt? Ich freue mich auf das Gespräch.</p>
+    </div>
+    <div class="about-cta-actions">
+      <a class="btn-primary" href="kontakt.html">Kontakt aufnehmen</a>
+      <a class="btn-secondary" href="https://www.robin-olbricht.de" target="_blank" rel="noopener">robin-olbricht.de ↗</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a class="footer-logo" href="index.html"><span>O</span>lbricht Digital</a>
+    <span class="footer-copy">© 2025 Robin Olbricht · Schmalkalden</span>
+    <ul class="footer-links">
+      <li><a href="about.html">Über mich</a></li>
+      <li><a href="impressum.html">Impressum</a></li>
+      <li><a href="datenschutz.html">Datenschutz</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => io.observe(r));
+
+    // Skill bars animate on scroll
+    const fills = document.querySelectorAll('.skill-bar-fill');
+    const barIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('animated'); barIO.unobserve(e.target); }
+      });
+    }, { threshold: 0.3 });
+    fills.forEach(f => barIO.observe(f));
+  </script>
+
+</body>
+</html>

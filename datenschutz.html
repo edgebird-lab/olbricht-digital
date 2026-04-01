@@ -1,28 +1,164 @@
----
-layout: default
-title: "Datenschutz – Robin Olbricht"
-description: "Datenschutzerklärung"
----
-{% assign i = site.data.impressum %}
-<section class="section" style="min-height: 80vh; padding-top: 10rem;">
-  <div class="container" style="max-width: 700px;">
-    <div class="section-header">
-      <span class="section-label">Rechtliches</span>
-      <h2>Datenschutzerklärung</h2>
-    </div>
-    <div style="color: var(--text-muted); line-height: 1.9;">
-      <h3 style="margin-bottom: 0.5rem;">1. Datenschutz auf einen Blick</h3>
-      <p>Diese Webseite erhebt keine personenbezogenen Daten über Tracking oder Analytics-Dienste.
-      {{ i.datenschutz_formular }}</p>
-      <h3 style="margin: 2rem 0 0.5rem;">2. Hosting</h3>
-      <p>{{ i.datenschutz_hosting }}</p>
-      <h3 style="margin: 2rem 0 0.5rem;">3. Ihre Rechte</h3>
-      <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung,
-      Datenübertragbarkeit und Widerspruch. Für Anfragen wenden Sie sich an:
-      <a href="mailto:{{ i.email }}" style="color:var(--amber);">{{ i.email }}</a></p>
-      <p style="margin-top: 3rem; font-size: 0.85rem;">
-        <a href="/" style="color: var(--amber);">← Zurück zur Startseite</a>
-      </p>
-    </div>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Datenschutz – Olbricht Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="index.html"><span>O</span>lbricht Digital</a>
+    <ul class="nav-links">
+      <li><a href="index.html#leistungen">Leistungen</a></li>
+      <li><a href="index.html#architektur">Lösungen</a></li>
+      <li><a href="about.html">Über mich</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <a class="nav-cta" href="kontakt.html">Kontakt</a>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero" style="position:relative;z-index:1;">
+    <div class="section-label">// Rechtliches</div>
+    <h1>Datenschutz&shy;erklärung</h1>
+    <p>Informationen gemäß Art. 13, 14 DSGVO</p>
   </div>
-</section>
+
+  <!-- PROSE CONTENT -->
+  <div class="prose">
+
+    <h2>1. Datenschutz auf einen Blick</h2>
+
+    <h3>Allgemeine Hinweise</h3>
+    <p>
+      Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.
+    </p>
+
+    <h3>Datenerfassung auf dieser Website</h3>
+    <p>
+      <strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong><br />
+      Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.
+    </p>
+    <p>
+      <strong>Wie erfassen wir Ihre Daten?</strong><br />
+      Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen (z. B. durch das Kontaktformular). Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z. B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs).
+    </p>
+    <p>
+      <strong>Wofür nutzen wir Ihre Daten?</strong><br />
+      Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.
+    </p>
+    <p>
+      <strong>Welche Rechte haben Sie bezüglich Ihrer Daten?</strong><br />
+      Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Außerdem haben Sie das Recht, unter bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.
+    </p>
+
+    <h2>2. Hosting</h2>
+
+    <h3>GitHub Pages</h3>
+    <p>
+      Diese Website wird auf GitHub Pages gehostet. Anbieter ist die GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA.
+    </p>
+    <p>
+      Wenn Sie diese Website besuchen, erfasst GitHub Pages automatisch technische Informationen wie IP-Adresse, Browsertyp, Betriebssystem und Referrer-URL. Diese Daten werden von GitHub verarbeitet. Weitere Informationen entnehmen Sie der Datenschutzerklärung von GitHub:
+      <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>.
+    </p>
+    <p>
+      Die Nutzung von GitHub Pages erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein berechtigtes Interesse an einer möglichst zuverlässigen Darstellung seiner Website.
+    </p>
+
+    <h2>3. Allgemeine Hinweise und Pflichtinformationen</h2>
+
+    <h3>Datenschutz</h3>
+    <p>
+      Der Betreiber dieser Seiten nimmt den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.
+    </p>
+
+    <h3>Hinweis zur verantwortlichen Stelle</h3>
+    <p>
+      Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:
+    </p>
+    <address>
+      <p>
+        Robin Olbricht<br />
+        Olbricht Digital<br />
+        <!-- TODO: Adresse eintragen -->
+        Thomas-Mann-Str. 2b<br />
+        98574 Schmalkalden<br />
+        E-Mail: <a href="mailto:kontakt@olbricht-digital.de">kontakt@olbricht-digital.de</a>
+      </p>
+    </address>
+
+    <h3>Speicherdauer</h3>
+    <p>
+      Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung entfällt. Wenn Sie ein berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich zulässigen Gründe für die Speicherung Ihrer personenbezogenen Daten haben.
+    </p>
+
+    <h3>Ihre Rechte</h3>
+    <p>Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf:</p>
+    <ul>
+      <li>Auskunft über Ihre bei uns gespeicherten Daten (Art. 15 DSGVO)</li>
+      <li>Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
+      <li>Löschung Ihrer bei uns gespeicherten Daten (Art. 17 DSGVO)</li>
+      <li>Einschränkung der Datenverarbeitung (Art. 18 DSGVO)</li>
+      <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+      <li>Widerspruch gegen die Verarbeitung Ihrer Daten (Art. 21 DSGVO)</li>
+    </ul>
+    <p>
+      Außerdem haben Sie das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten zu beschweren. Zuständig ist die Aufsichtsbehörde des Bundeslandes, in dem Sie wohnen, oder des Bundeslandes, in dem der Verantwortliche seinen Sitz hat. Für Thüringen: <a href="https://www.tlfdi.de" target="_blank" rel="noopener">Thüringer Landesbeauftragter für den Datenschutz und die Informationsfreiheit (TLfDI)</a>.
+    </p>
+
+    <h2>4. Datenerfassung auf dieser Website</h2>
+
+    <h3>Kontaktformular &amp; E-Mail-Kontakt</h3>
+    <p>
+      Wenn Sie uns per Kontaktformular oder E-Mail Anfragen zukommen lassen, werden Ihre Angaben aus dem Formular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
+    </p>
+    <p>
+      Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO).
+    </p>
+    <p>
+      Die von Ihnen im Kontaktformular eingegebenen Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt. Zwingende gesetzliche Bestimmungen – insbesondere Aufbewahrungsfristen – bleiben unberührt.
+    </p>
+
+    <h3>Externe Schriftarten (Google Fonts)</h3>
+    <p>
+      Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten sogenannte Google Fonts, die von Google bereitgestellt werden. Beim Aufruf einer Seite lädt Ihr Browser die benötigten Fonts in Ihren Browsercache, um Texte und Schriftarten korrekt anzuzeigen. Dabei wird eine Verbindung zu Servern von Google hergestellt. Hierdurch erlangt Google Kenntnis darüber, dass über Ihre IP-Adresse diese Website aufgerufen wurde.
+    </p>
+    <p>
+      Die Nutzung von Google Fonts erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein berechtigtes Interesse an der einheitlichen Darstellung des Schriftbildes auf seiner Website. Wenn eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO.
+    </p>
+    <p>
+      Wenn Ihr Browser Google Fonts nicht unterstützt, wird eine Standardschrift von Ihrem Computer genutzt. Weitere Informationen zu Google Fonts finden Sie unter <a href="https://developers.google.com/fonts/faq" target="_blank" rel="noopener">https://developers.google.com/fonts/faq</a> und in der Datenschutzerklärung von Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a>.
+    </p>
+
+    <h2>5. Keine Analyse-Tools / Tracking</h2>
+    <p>
+      Diese Website verwendet <strong>keine</strong> Analyse- oder Tracking-Tools (z. B. Google Analytics, Matomo oder ähnliche). Es werden keine Cookies gesetzt, die nicht technisch zwingend erforderlich sind.
+    </p>
+
+    <p style="margin-top:3rem; font-size:0.8rem; color:var(--muted);">
+      Stand: 2025 · Diese Datenschutzerklärung wurde auf Basis einer Vorlage erstellt und sollte bei Änderungen des Angebots aktualisiert werden. Im Zweifel empfiehlt sich die Konsultation eines Rechtsanwalts.
+    </p>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a class="footer-logo" href="index.html"><span>O</span>lbricht Digital</a>
+    <span class="footer-copy">© 2025 Robin Olbricht · Schmalkalden</span>
+    <ul class="footer-links">
+      <li><a href="about.html">Über mich</a></li>
+      <li><a href="impressum.html">Impressum</a></li>
+      <li><a href="datenschutz.html">Datenschutz</a></li>
+    </ul>
+  </footer>
+
+</body>
+</html>

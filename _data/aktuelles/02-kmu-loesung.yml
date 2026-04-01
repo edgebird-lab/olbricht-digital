@@ -1,7 +1,0 @@
-titel: "All-in-One Finanzlösung für KMU"
-status: "Im Aufbau"
-kategorie: "build"
-beschreibung: "Ich entwickle eine vollständige Open-Source-Infrastruktur für kleine und mittlere Unternehmen: Bank-CSV → PostgreSQL → Buchhaltungs-CSV → Metabase-BI. Das Einzige, was der Kunde benötigt, ist eine Schnittstelle – den Rest hostet er selbst."
-link_text: "Mehr erfahren →"
-link_url: "#leistungen"
-reihenfolge: 2

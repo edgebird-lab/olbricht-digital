@@ -1,301 +1,570 @@
----
-layout: default
-title: "Robin Olbricht – Wirtschaftsinformatiker & Unternehmer"
-description: "Wirtschaftsinformatik-Student, Gründer und Entwickler aus Schmalkalden. Spezialisiert auf Jekyll-Webseiten, PostgreSQL-Schnittstellen und Open-Source-Lösungen für KMU."
----
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Olbricht Digital – Moderne Softwareentwicklung, individuelle Weblösungen und datengetriebene Anwendungen. Robin Olbricht, Schmalkalden." />
+  <title>Olbricht Digital – Robin Olbricht</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    /* ── INDEX-ONLY STYLES ── */
 
-<!-- ═══════════════════════════════════════
-     HERO
-════════════════════════════════════════ -->
-{% assign p = site.data.profil %}
-{% assign v = site.data.verfuegbarkeit %}
-<section class="hero" id="hero">
-  <div class="hero-bg">
-    <div class="hero-grid"></div>
-    <div class="hero-glow"></div>
-  </div>
-  <div class="hero-inner">
-    <div class="hero-tag">
-      <span class="tag-dot"></span>
-      <span>{{ v.text }}</span>
-    </div>
-    <h1 class="hero-name">
-      <span class="name-line">{{ p.vorname }}</span>
-      <span class="name-line accent">{{ p.nachname }}</span>
-    </h1>
-    <p class="hero-subtitle">{{ p.subtitle }}</p>
-    <p class="hero-desc">{{ p.hero_desc }}</p>
-    <div class="hero-actions">
-      <a href="#leistungen" class="btn btn-primary">Meine Leistungen</a>
-      <a href="#kontakt" class="btn btn-ghost">Kontakt aufnehmen</a>
-    </div>
-    <div class="hero-stack">
-      <span class="stack-label">Tech-Stack</span>
-      <div class="stack-chips">
-        {% for tech in p.tech_stack %}
-        <span class="chip">{{ tech }}</span>
-        {% endfor %}
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 0 5vw;
+      padding-top: 64px;
+      gap: 4rem;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-left { max-width: 620px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(255, 94, 26, 0.3);
+      padding: 0.35rem 0.85rem;
+      margin-bottom: 1.8rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    .hero h1 {
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    .hero h1 .accent { color: var(--accent); }
+    .hero h1 .line2 {
+      display: block;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      animation: fadeUp 0.7s 0.3s ease both;
+      flex-wrap: wrap;
+    }
+
+    /* Terminal */
+    .hero-terminal { animation: fadeUp 0.8s 0.4s ease both; }
+    .terminal-window {
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: var(--bg3);
+      border-bottom: 1px solid var(--line);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-red    { background: #ff5f57; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green  { background: #28c840; }
+    .terminal-title {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin: 0 auto;
+      letter-spacing: 0.05em;
+    }
+    .terminal-body {
+      padding: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      line-height: 2;
+    }
+    .t-prompt  { color: var(--accent); }
+    .t-comment { color: #4a5068; }
+    .t-key     { color: var(--accent2); }
+    .t-val     { color: #6bd86b; }
+    .t-out     { color: var(--muted); }
+    .t-cursor  {
+      display: inline-block;
+      width: 9px; height: 15px;
+      background: var(--accent);
+      vertical-align: middle;
+      animation: blink 1.1s step-end infinite;
+    }
+
+    /* Services */
+    .service-card {
+      padding: 2.5rem;
+      transition: background 0.2s;
+      cursor: default;
+    }
+    .service-card:hover { background: var(--bg2); }
+    .service-number {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .service-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+    .service-card h3 { margin-bottom: 0.75rem; }
+    .service-card p { font-size: 0.9rem; }
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1.5rem;
+    }
+
+    /* Architecture flow */
+    .arch-section {
+      background: var(--bg2);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .arch-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .arch-flow { display: flex; flex-direction: column; }
+    .arch-step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      position: relative;
+    }
+    .arch-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 19px; top: 42px;
+      width: 1px;
+      height: calc(100% - 10px);
+      background: var(--line);
+    }
+    .arch-node {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(255, 94, 26, 0.08);
+      margin-top: 4px;
+    }
+    .arch-content { padding-bottom: 2.5rem; }
+    .arch-content h4 { margin-bottom: 0.3rem; }
+
+    /* Benefits */
+    .benefit-item {
+      padding: 2rem 2.5rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      transition: background 0.2s;
+    }
+    .benefit-item:hover { background: var(--bg2); }
+    .benefit-metric {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      flex-shrink: 0;
+      min-width: 60px;
+    }
+    .benefit-text h4 { margin-bottom: 0.3rem; }
+
+    /* Benefits grid override */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+    .benefits-grid > * { background: var(--bg); }
+
+    /* Region map */
+    .region-section {
+      background: var(--bg2);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .region-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .region-map {
+      height: 260px;
+      background: var(--bg3);
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .region-map::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 94, 26, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 94, 26, 0.05) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    .map-pin-group {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .map-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent2);
+    }
+    .map-ping {
+      width: 50px; height: 50px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .map-ping::before {
+      content: '';
+      position: absolute;
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 94, 26, 0.4);
+      animation: ping 2s ease-in-out infinite;
+    }
+    .map-ping::after {
+      content: '';
+      position: absolute;
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 94, 26, 0.2);
+      animation: ping 2s 0.5s ease-in-out infinite;
+    }
+    .map-dot-inner {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      position: relative;
+      z-index: 2;
+    }
+    .region-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    .region-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .region-list li::before { content: '›'; color: var(--accent); font-size: 1.1rem; }
+
+    /* CTA */
+    .cta-section { text-align: center; padding: 8rem 5vw; }
+    .cta-section h2 { font-size: clamp(2.8rem, 5vw, 5rem); margin-bottom: 1rem; }
+    .cta-section p { max-width: 480px; margin: 0 auto 3rem; font-size: 1.05rem; }
+    .cta-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; padding-bottom: 4rem; }
+      .hero-terminal { display: none; }
+      .arch-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .region-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="index.html"><span>O</span>lbricht Digital</a>
+    <ul class="nav-links">
+      <li><a href="index.html#leistungen">Leistungen</a></li>
+      <li><a href="index.html#architektur">Lösungen</a></li>
+      <li><a href="about.html">Über mich</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <a class="nav-cta" href="kontakt.html">Kontakt</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-badge">Im Aufbau — Start bald</div>
+      <h1>
+        Olbricht<br>
+        <span class="accent">Digital</span>
+        <span class="line2">— Robin Olbricht</span>
+      </h1>
+      <p class="hero-desc">
+        Moderne Softwareentwicklung, individuelle Weblösungen und datengetriebene Anwendungen. Strukturiert. Lösungsorientiert. Praxisnah.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#leistungen">Leistungen ansehen</a>
+        <a class="btn-secondary" href="kontakt.html">Kontakt aufnehmen</a>
       </div>
     </div>
-  </div>
-  <div class="hero-scroll-hint">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     ÜBER MICH
-════════════════════════════════════════ -->
-<section class="section" id="ueber-mich">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-label">01 — Über mich</span>
-      <h2>Vom Handwerk zur <br/><em>digitalen Infrastruktur</em></h2>
+    <div class="hero-terminal">
+      <div class="terminal-window">
+        <div class="terminal-bar">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="terminal-title">olbricht-digital ~ stack.yml</span>
+        </div>
+        <div class="terminal-body">
+          <div><span class="t-prompt">❯ </span>cat stack.yml</div>
+          <div class="t-comment"># Datenarchitektur</div>
+          <div><span class="t-key">database</span>:  <span class="t-val">PostgreSQL 16</span></div>
+          <div><span class="t-key">bi_tool</span>:   <span class="t-val">Metabase (OSS)</span></div>
+          <div><span class="t-key">invoices</span>:  <span class="t-val">PDF → AI → DB</span></div>
+          <div><span class="t-key">backend</span>:   <span class="t-val">Spring Boot / Java 17</span></div>
+          <div><span class="t-key">frontend</span>:  <span class="t-val">Astro · 100% custom</span></div>
+          <div>&nbsp;</div>
+          <div><span class="t-prompt">❯ </span>cat values.txt</div>
+          <div class="t-out">→ Open Source first</div>
+          <div class="t-out">→ Kein Vendor Lock-in</div>
+          <div class="t-out">→ Transparenz &amp; Kontrolle</div>
+          <div class="t-out">→ Region Schmalkalden / Suhl</div>
+          <div>&nbsp;</div>
+          <div><span class="t-prompt">❯ </span><span class="t-cursor"></span></div>
+        </div>
+      </div>
     </div>
-    <div class="about-grid">
-      <div class="about-portrait">
-        <div class="portrait-frame">
-          {% if p.portrait and p.portrait != "" %}
-          <img src="{{ p.portrait | relative_url }}" alt="Portrait {{ p.vorname }} {{ p.nachname }}" class="portrait-img" />
-          {% else %}
-          <div class="portrait-placeholder">
-            <span>{{ p.vorname | slice: 0 }}{{ p.nachname | slice: 0 }}</span>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- LEISTUNGEN -->
+  <section id="leistungen">
+    <div class="section-label">// 01 – Leistungen</div>
+    <h2>Was ich anbiete</h2>
+    <p class="section-intro">Drei Kernbereiche – alle selbst entwickelt, ohne Baukastensysteme, ohne unnötige Abhängigkeiten.</p>
+    <div class="grid-3 reveal">
+      <div class="service-card">
+        <span class="service-number">01 —</span>
+        <span class="service-icon">⚡</span>
+        <h3>Schnittstellen &amp; Datenlösungen</h3>
+        <p>Ich verbinde Systeme, extrahiere Daten über APIs und baue strukturierte Pipelines – von der Rohdatenquelle bis zum fertigen Dashboard.</p>
+        <div class="service-tags">
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">Metabase</span>
+          <span class="tag">ETL</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-number">02 —</span>
+        <span class="service-icon">🌐</span>
+        <h3>Webseiten &amp; Design</h3>
+        <p>Vollständig individuell entwickelte Webseiten – kein WordPress, kein Baukasten. Schnell, sicher und exakt auf Ihre Anforderungen zugeschnitten.</p>
+        <div class="service-tags">
+          <span class="tag">Astro</span>
+          <span class="tag">HTML / CSS</span>
+          <span class="tag">Performance</span>
+          <span class="tag">Custom Code</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-number">03 —</span>
+        <span class="service-icon">🧠</span>
+        <h3>Software &amp; SaaS</h3>
+        <p>Maßgeschneiderte Softwarelösungen und SaaS-Anwendungen, die Prozesse automatisieren und Unternehmen effizienter aufstellen.</p>
+        <div class="service-tags">
+          <span class="tag">Spring Boot</span>
+          <span class="tag">Java 17</span>
+          <span class="tag">Automatisierung</span>
+          <span class="tag">SaaS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ARCHITEKTUR -->
+  <section id="architektur" class="arch-section">
+    <div class="arch-inner">
+      <div>
+        <div class="section-label">// 02 – Datenlösungen</div>
+        <h2>Open Source Architektur</h2>
+        <p class="section-intro">Transparenz, Flexibilität und Unabhängigkeit – keine proprietären Abhängigkeiten, volle Kontrolle über Ihre Daten.</p>
+        <a class="btn-secondary" href="kontakt.html">Lösung anfragen</a>
+      </div>
+      <div class="arch-flow reveal">
+        <div class="arch-step">
+          <div class="arch-node">01</div>
+          <div class="arch-content">
+            <h4>Datenextraktion</h4>
+            <p>Daten werden über Bank-APIs und andere Schnittstellen abgerufen und strukturiert (CSV/JSON) bereitgestellt.</p>
           </div>
-          {% endif %}
-          <div class="portrait-badge">
-            <span class="badge-num">{{ p.alter }}</span>
-            <span class="badge-label">Jahre</span>
+        </div>
+        <div class="arch-step">
+          <div class="arch-node">02</div>
+          <div class="arch-content">
+            <h4>PostgreSQL Datenbank</h4>
+            <p>Speicherung und Verarbeitung erfolgen zentral in PostgreSQL – das robuste Kernstück der Architektur.</p>
+          </div>
+        </div>
+        <div class="arch-step">
+          <div class="arch-node">03</div>
+          <div class="arch-content">
+            <h4>PDF-Rechnungsscanner</h4>
+            <p>Eingehende PDF-Rechnungen werden automatisch analysiert und strukturiert in die Datenbank überführt.</p>
+          </div>
+        </div>
+        <div class="arch-step">
+          <div class="arch-node">04</div>
+          <div class="arch-content">
+            <h4>BI-Dashboard (Metabase)</h4>
+            <p>Die Daten werden in Metabase visualisiert – transparente Analysen, vollständig unter Ihrer Kontrolle.</p>
           </div>
         </div>
       </div>
-      <div class="about-content">
-        <p class="about-lead">{{ p.about_lead }}</p>
-        <p>{{ p.about_text }}</p>
-        <div class="about-facts">
-          {% for fakt in p.fakten %}
-          <div class="fact">
-            <span class="fact-value">{{ fakt.wert }} <span class="fact-unit">{{ fakt.einheit }}</span></span>
-            <span class="fact-desc">{{ fakt.beschreibung }}</span>
-          </div>
-          {% endfor %}
+    </div>
+  </section>
+
+  <!-- WEBSEITEN -->
+  <section id="webseiten">
+    <div class="section-label">// 03 – Webentwicklung</div>
+    <h2>Warum kein Baukasten</h2>
+    <p class="section-intro">Individuelle Entwicklung ist kein Luxus – sie ist die bessere Entscheidung.</p>
+    <div class="benefits-grid reveal">
+      <div class="benefit-item">
+        <div class="benefit-metric">⚡</div>
+        <div class="benefit-text">
+          <h4>Schneller</h4>
+          <p>Kein überflüssiger Code, keine ungenutzten Plugins. Nur das, was tatsächlich gebraucht wird.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-metric">🔒</div>
+        <div class="benefit-text">
+          <h4>Sicherer</h4>
+          <p>Keine Plugin-Abhängigkeiten, keine bekannten Schwachstellen durch überflüssige Drittanbieter.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-metric">🎯</div>
+        <div class="benefit-text">
+          <h4>Flexibler</h4>
+          <p>Exakt auf Ihre Anforderungen zugeschnitten – keine Kompromisse durch Template-Beschränkungen.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-metric">♻️</div>
+        <div class="benefit-text">
+          <h4>Nachhaltiger</h4>
+          <p>Sauber strukturierter Code bleibt wartbar, erweiterbar und verständlich.</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══════════════════════════════════════
-     LEBENSLAUF
-════════════════════════════════════════ -->
-<section class="section section-dark" id="lebenslauf">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-label">02 — Lebenslauf</span>
-      <h2>Ein ungewöhnlicher <br/><em>Werdegang</em></h2>
-    </div>
-    <div class="timeline">
+  <hr class="divider" />
 
-      {% assign stationen_list = "" | split: "" %}
-      {% for item in site.data.stationen %}
-        {% assign stationen_list = stationen_list | push: item[1] %}
-      {% endfor %}
-      {% assign stationen_sorted = stationen_list | sort: "reihenfolge" %}
-
-      {% for station in stationen_sorted %}
-      <div class="timeline-item">
-        {% if station.aktuell %}
-        <div class="timeline-dot active"></div>
-        {% else %}
-        <div class="timeline-dot"></div>
-        {% endif %}
-        <div class="timeline-content">
-          <span class="timeline-period">{{ station.zeitraum }}</span>
-          <h3>{{ station.titel }}</h3>
-          <p>{{ station.beschreibung }}</p>
-          {% if station.tags and station.tags.size > 0 %}
-          <div class="timeline-tags">
-            {% for tag in station.tags %}
-            <span>{{ tag }}</span>
-            {% endfor %}
-          </div>
-          {% endif %}
-        </div>
-      </div>
-      {% endfor %}
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     LEISTUNGEN
-════════════════════════════════════════ -->
-<section class="section" id="leistungen">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-label">03 — Leistungen</span>
-      <h2>Was ich für dein<br/><em>Unternehmen baue</em></h2>
-    </div>
-    <div class="services-grid">
-
-      {% assign leistungen_list = "" | split: "" %}
-      {% for item in site.data.leistungen %}
-        {% assign leistungen_list = leistungen_list | push: item[1] %}
-      {% endfor %}
-      {% assign leistungen_sorted = leistungen_list | sort: "reihenfolge" %}
-
-      {% for leistung in leistungen_sorted %}
-      <div class="service-card{% if leistung.featured %} service-card--featured{% endif %}">
-        <div class="service-icon">
-          {% case leistung.icon %}
-          {% when "web" %}
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          {% when "database" %}
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-          {% when "api" %}
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3m10 0h3a2 2 0 0 0 2-2v-3"/><circle cx="12" cy="12" r="3"/></svg>
-          {% when "shield" %}
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          {% endcase %}
-        </div>
-        <h3>{{ leistung.titel }}</h3>
-        <p>{{ leistung.beschreibung }}</p>
-        {% if leistung.features and leistung.features.size > 0 %}
-        <ul class="service-features">
-          {% for feature in leistung.features %}
-          <li>{{ feature }}</li>
-          {% endfor %}
+  <!-- REGION -->
+  <section class="region-section">
+    <div class="region-inner">
+      <div>
+        <div class="section-label">// 04 – Region</div>
+        <h2>Tätigkeitsgebiet</h2>
+        <p class="section-intro">Als lokaler IT-Dienstleister bin ich persönlich vor Ort erreichbar – für Beratung, Umsetzung und Support.</p>
+        <ul class="region-list">
+          <li>Schmalkalden</li>
+          <li>Suhl</li>
+          <li>Meiningen</li>
+          <li>Umgebung &amp; auf Anfrage</li>
         </ul>
-        {% endif %}
       </div>
-      {% endfor %}
-
-    </div>
-
-    <div class="services-cta">
-      <div class="cta-box">
-        <p>Interessiert? Lass uns über dein Projekt sprechen.</p>
-        <a href="#kontakt" class="btn btn-primary">Jetzt Kontakt aufnehmen</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     AKTUELLES
-════════════════════════════════════════ -->
-<section class="section section-dark" id="aktuelles">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-label">04 — Aktuelles</span>
-      <h2>Woran ich gerade<br/><em>arbeite</em></h2>
-    </div>
-    <div class="current-grid">
-
-      {% assign aktuelles_list = "" | split: "" %}
-      {% for item in site.data.aktuelles %}
-        {% assign aktuelles_list = aktuelles_list | push: item[1] %}
-      {% endfor %}
-      {% assign aktuelles_sorted = aktuelles_list | sort: "reihenfolge" %}
-
-      {% for projekt in aktuelles_sorted %}
-      <div class="current-card">
-        <div class="current-card-header">
-          <div class="current-icon current-icon--{{ projekt.kategorie }}">
-            {% case projekt.kategorie %}
-            {% when "yt" %}
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            {% when "build" %}
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-            {% when "study" %}
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-            {% else %}
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            {% endcase %}
-          </div>
-          <span class="current-status">{{ projekt.status }}</span>
-        </div>
-        <h3>{{ projekt.titel }}</h3>
-        <p>{{ projekt.beschreibung }}</p>
-        {% if projekt.link_text and projekt.link_text != "" %}
-        <a href="{{ projekt.link_url }}" {% unless projekt.link_url contains "#" %}target="_blank" rel="noopener"{% endunless %} class="current-link">
-          {{ projekt.link_text }}
-        </a>
-        {% endif %}
-      </div>
-      {% endfor %}
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     KONTAKT
-════════════════════════════════════════ -->
-<section class="section" id="kontakt">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-label">05 — Kontakt</span>
-      <h2>Lass uns zusammen<br/><em>etwas aufbauen</em></h2>
-    </div>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <p class="contact-lead">Du hast ein Projekt, eine Idee oder eine Frage? Schreib mir – ich melde
-        mich in der Regel innerhalb von 24 Stunden.</p>
-        <div class="contact-methods">
-          <a href="mailto:{{ p.email }}" class="contact-method">
-            <div class="contact-method-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <div>
-              <span class="method-label">E-Mail</span>
-              <span class="method-value">{{ p.email }}</span>
-            </div>
-          </a>
-          <a href="{{ p.linkedin }}" target="_blank" rel="noopener" class="contact-method">
-            <div class="contact-method-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            </div>
-            <div>
-              <span class="method-label">LinkedIn</span>
-              <span class="method-value">{{ p.vorname }} {{ p.nachname }}</span>
-            </div>
-          </a>
-          <a href="{{ p.github }}" target="_blank" rel="noopener" class="contact-method">
-            <div class="contact-method-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-            </div>
-            <div>
-              <span class="method-label">GitHub</span>
-              <span class="method-value">edgebird-lab</span>
-            </div>
-          </a>
+      <div class="region-map reveal">
+        <div class="map-pin-group">
+          <div class="map-ping"><div class="map-dot-inner"></div></div>
+          <div class="map-label">Schmalkalden, Thüringen</div>
         </div>
       </div>
-      <div class="contact-form-wrap">
-        <form class="contact-form" action="https://formspree.io/f/mvzvknqg" method="POST">
-          <div class="form-row">
-            <div class="form-field">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" placeholder="Dein Name" required />
-            </div>
-            <div class="form-field">
-              <label for="email">E-Mail</label>
-              <input type="email" id="email" name="email" placeholder="deine@email.de" required />
-            </div>
-          </div>
-          <div class="form-field">
-            <label for="subject">Betreff</label>
-            <input type="text" id="subject" name="subject" placeholder="Worum geht es?" />
-          </div>
-          <div class="form-field">
-            <label for="message">Nachricht</label>
-            <textarea id="message" name="message" rows="5" placeholder="Beschreib dein Projekt oder deine Frage..." required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-full">Nachricht absenden →</button>
-        </form>
-      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="section-label">// 05 – Kontakt</div>
+    <h2>Projekt starten<br><span style="color:var(--accent)">—</span> oder anfragen</h2>
+    <p>Sie haben ein konkretes Vorhaben oder möchten mehr erfahren? Ich freue mich auf den Austausch.</p>
+    <div class="cta-links">
+      <a class="btn-primary" href="kontakt.html">Kontaktformular öffnen</a>
+      <a class="btn-secondary" href="about.html">Über mich</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a class="footer-logo" href="index.html"><span>O</span>lbricht Digital</a>
+    <span class="footer-copy">© 2025 Robin Olbricht · Schmalkalden</span>
+    <ul class="footer-links">
+      <li><a href="about.html">Über mich</a></li>
+      <li><a href="impressum.html">Impressum</a></li>
+      <li><a href="datenschutz.html">Datenschutz</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => io.observe(r));
+  </script>
+
+</body>
+</html>

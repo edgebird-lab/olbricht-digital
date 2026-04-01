@@ -1,63 +1,80 @@
-# Robin Olbricht – Persönliche Webseite
+# Olbricht Digital – Website
 
-Persönliche Website auf Basis von **Jekyll** mit Dark-Theme-Design.
+Statische Website für GitHub Pages. Kein Build-Prozess, kein Framework – reines HTML/CSS/JS.
 
-## Voraussetzungen
+## Dateistruktur
 
-- Ruby ≥ 3.0
-- Bundler (`gem install bundler`)
-
-## Lokale Entwicklung
-
-```bash
-# 1. Ins Projektverzeichnis wechseln
-cd robin-olbricht
-
-# 2. Abhängigkeiten installieren
-bundle install
-
-# 3. Entwicklungsserver starten
-bundle exec jekyll serve --livereload
-
-# Webseite läuft auf: http://localhost:4000
+```
+olbricht-digital/
+├── _config.yml          # GitHub Pages Konfiguration
+├── index.html           # Startseite
+├── about.html           # Über mich
+├── kontakt.html         # Kontaktseite
+├── impressum.html       # Impressum (noindex)
+├── datenschutz.html     # Datenschutzerklärung (noindex)
+└── assets/
+    └── css/
+        └── style.css    # Gemeinsames Stylesheet (alle Pages)
 ```
 
-## Deployment
+## GitHub Pages einrichten
 
-### Netlify (empfohlen)
-1. Repository auf GitHub pushen
-2. Netlify-Account → "New site from Git" → Repository auswählen
-3. Build-Command: `bundle exec jekyll build`
-4. Publish-Directory: `_site`
-5. Deploy!
+1. Repository auf GitHub erstellen (z. B. `olbricht-digital`)
+2. Alle Dateien in das Repository pushen
+3. Unter **Settings → Pages** den Branch `main` und den Root-Ordner (`/`) auswählen
+4. Optional: Custom Domain eintragen (z. B. `olbricht-digital.de`)
 
-### GitHub Pages
-```bash
-# In _config.yml: baseurl auf "" setzen, url auf deine GitHub-Pages-URL
-bundle exec jekyll build
-# _site/ Inhalt auf gh-pages Branch pushen
+### Mit Custom Domain
+
+1. Bei deinem DNS-Anbieter (Inwx) folgende Records setzen:
+   ```
+   A     @    185.199.108.153
+   A     @    185.199.109.153
+   A     @    185.199.110.153
+   A     @    185.199.111.153
+   CNAME www  deinusername.github.io
+   ```
+2. In `_config.yml` die `url` auf deine Domain setzen
+3. Datei `CNAME` im Root mit dem Inhalt `olbricht-digital.de` erstellen
+
+## TODO-Liste (vor Launch)
+
+- [ ] `impressum.html`: Straße/Hausnummer eintragen
+- [ ] `impressum.html`: Telefonnummer ergänzen oder Zeile entfernen
+- [ ] `datenschutz.html`: Adresse eintragen
+- [ ] `kontakt.html`: E-Mail-Adresse prüfen (`kontakt@olbricht-digital.de`)
+- [ ] `kontakt.html`: Formular-Backend einrichten (Formspree oder mailto-Fallback belassen)
+- [ ] `_config.yml`: `url` auf finale Domain setzen
+- [ ] `CNAME`-Datei erstellen (wenn Custom Domain)
+- [ ] Hero-Badge „Im Aufbau" entfernen, wenn live
+
+## Formular-Optionen
+
+Das Kontaktformular in `kontakt.html` nutzt aktuell einen `mailto:`-Fallback.
+Für echten E-Mail-Versand ohne Backend:
+
+### Option A: Formspree (empfohlen, kostenlos bis 50 Mails/Monat)
+```html
+<form action="https://formspree.io/f/DEIN_KEY" method="POST">
+```
+Account unter [formspree.io](https://formspree.io) erstellen.
+
+### Option B: Netlify Forms (falls zu Netlify gewechselt wird)
+```html
+<form data-netlify="true" name="kontakt">
 ```
 
-## Netlify CMS einrichten (für Kundenprojekte)
+## CSS anpassen
 
-1. `netlify.toml` und `admin/`-Ordner anlegen (Anleitung: https://decapcms.org/docs/netlify/)
-2. Netlify Identity aktivieren
-3. Kunde erhält Login-Link → kann Inhalte im Browser bearbeiten
+Alle Design-Variablen stehen oben in `assets/css/style.css` unter `:root {}`.
+Zum Anpassen nur diese Werte ändern:
 
-## Personalisieren
-
-| Was | Wo |
-|---|---|
-| Name, Social Links | `_config.yml` |
-| Portrait | `assets/img/portrait.jpg` hinzufügen + CSS in `.portrait-placeholder` anpassen |
-| E-Mail Formular | `index.html` → Formspree-ID ersetzen: `action="https://formspree.io/f/DEINE_ID"` |
-| Farben / Fonts | `assets/css/main.css` → `:root` Block |
-| Impressum-Adresse | `impressum.html` |
-
-## Tech-Stack
-
-- **Jekyll 4.x** – Static Site Generator
-- **Liquid** – Template-Engine
-- **Vanilla JS** – Keine Framework-Abhängigkeiten
-- **Google Fonts** – Playfair Display, Syne, DM Mono
-- **Formspree** – Kontaktformular (kein eigener Server nötig)
+```css
+:root {
+  --bg:      #0b0c10;   /* Haupthintergrund */
+  --accent:  #ff5e1a;   /* Akzentfarbe (Orange) */
+  --accent2: #ffaa55;   /* Sekundärer Akzent */
+  --text:    #e8eaf0;   /* Haupttextfarbe */
+  --muted:   #7a7e8e;   /* Gedämpfter Text */
+}
+```

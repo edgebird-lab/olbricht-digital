@@ -1,26 +1,22 @@
-title: "Robin Olbricht"
-description: "Wirtschaftsinformatiker · Unternehmer · Entwickler"
-author:
-  name: "Robin Olbricht"
-  email: "kontakt@olbricht-digital.de"
-  github: "edgebird-lab"
-  linkedin: "robin-olbricht-789b5139a"
+# Olbricht Digital – GitHub Pages Config
+# Docs: https://docs.github.com/en/pages
 
-url: "https://robin-olbricht.de"
-baseurl: ""
+title: "Olbricht Digital"
+description: "Moderne Softwareentwicklung, individuelle Weblösungen und datengetriebene Anwendungen."
+url: "https://olbricht-digital.de"   # Deine Custom Domain – sonst z. B. https://deinusername.github.io
+baseurl: ""                           # Leer lassen bei Custom Domain; bei Repo-Subdomain z. B. "/olbricht-digital"
 
-lang: "de"
-
-# Build settings
+# Jekyll-Verarbeitung
 markdown: kramdown
-highlighter: rouge
+theme: null                           # Kein Jekyll-Theme – wir nutzen unser eigenes CSS
 
-plugins:
-  - jekyll-seo-tag
-  - jekyll-sitemap
-
+# Exclude non-public files from the build
 exclude:
+  - README.md
   - Gemfile
   - Gemfile.lock
-  - README.md
   - node_modules/
+  - .git/
+
+# Plugins (GitHub Pages safe-list)
+plugins: []
