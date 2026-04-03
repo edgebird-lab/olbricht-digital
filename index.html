@@ -208,7 +208,6 @@
     }
     .benefit-text h4 { margin-bottom: 0.3rem; }
 
-    /* Benefits grid override */
     .benefits-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -218,7 +217,7 @@
     }
     .benefits-grid > * { background: var(--bg); }
 
-    /* Region map */
+    /* ── Region map ── */
     .region-section {
       background: var(--bg2);
       border-top: 1px solid var(--line);
@@ -230,70 +229,6 @@
       gap: 5rem;
       align-items: center;
     }
-    .region-map {
-      height: 260px;
-      background: var(--bg3);
-      border: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-    }
-    .region-map::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255, 94, 26, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 94, 26, 0.05) 1px, transparent 1px);
-      background-size: 30px 30px;
-    }
-    .map-pin-group {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.3rem;
-    }
-    .map-label {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent2);
-    }
-    .map-ping {
-      width: 50px; height: 50px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .map-ping::before {
-      content: '';
-      position: absolute;
-      width: 50px; height: 50px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 94, 26, 0.4);
-      animation: ping 2s ease-in-out infinite;
-    }
-    .map-ping::after {
-      content: '';
-      position: absolute;
-      width: 70px; height: 70px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 94, 26, 0.2);
-      animation: ping 2s 0.5s ease-in-out infinite;
-    }
-    .map-dot-inner {
-      width: 12px; height: 12px;
-      border-radius: 50%;
-      background: var(--accent);
-      position: relative;
-      z-index: 2;
-    }
     .region-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
     .region-list li {
       display: flex;
@@ -304,6 +239,47 @@
       color: var(--muted);
     }
     .region-list li::before { content: '›'; color: var(--accent); font-size: 1.1rem; }
+
+    /* Real map container */
+    .region-map {
+      position: relative;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      height: 320px;
+    }
+    /* Accent corner */
+    .region-map::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 40px; height: 3px;
+      background: var(--accent);
+      z-index: 10;
+    }
+    .region-map iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      /* dark theme filter */
+      filter: invert(92%) hue-rotate(180deg) saturate(0.75) brightness(0.88);
+    }
+    /* overlay label bottom-left */
+    .region-map-label {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(0,0,0,0.8);
+      color: var(--accent);
+      padding: 0.25rem 0.6rem;
+      border: 1px solid rgba(255, 94, 26, 0.35);
+      pointer-events: none;
+      z-index: 10;
+    }
 
     /* CTA */
     .cta-section { text-align: center; padding: 8rem 5vw; }
@@ -318,6 +294,7 @@
       .arch-inner { grid-template-columns: 1fr; gap: 3rem; }
       .benefits-grid { grid-template-columns: 1fr; }
       .region-inner { grid-template-columns: 1fr; }
+      .region-map { height: 260px; }
     }
   </style>
 </head>
@@ -526,10 +503,19 @@
         </ul>
       </div>
       <div class="region-map reveal">
-        <div class="map-pin-group">
-          <div class="map-ping"><div class="map-dot-inner"></div></div>
-          <div class="map-label">Schmalkalden, Thüringen</div>
-        </div>
+        <!--
+          Google Maps Embed – kein API-Key erforderlich für einfache Einbettungen.
+          Zeigt Schmalkalden + umliegende Region (Zoom 10 = Suhl/Meiningen sichtbar).
+          CSS filter: invert + hue-rotate → dark theme passend zum Design.
+        -->
+        <iframe
+          src="https://maps.google.com/maps?q=Schmalkalden,+Th%C3%BCringen,+Germany&t=&z=10&ie=UTF8&iwloc=&output=embed"
+          title="Tätigkeitsgebiet Schmalkalden, Suhl, Meiningen"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          aria-label="Karte: Tätigkeitsgebiet Schmalkalden, Suhl, Meiningen">
+        </iframe>
+        <span class="region-map-label">Schmalkalden · Suhl · Meiningen</span>
       </div>
     </div>
   </section>

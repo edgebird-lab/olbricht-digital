@@ -67,12 +67,51 @@
     }
     .info-card a:hover { color: var(--accent); }
 
+    /* Map embed inside info card */
+    .map-card { padding: 0; overflow: hidden; flex-direction: column; gap: 0; }
+    .map-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem 1rem;
+    }
+    .map-embed-wrapper {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      border-top: 1px solid var(--line);
+    }
+    .map-embed-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      /* dark-mode filter: inverts map colors to match the dark theme */
+      filter: invert(92%) hue-rotate(180deg) saturate(0.75) brightness(0.88);
+    }
+    /* small badge over the map */
+    .map-badge {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(0,0,0,0.75);
+      color: var(--accent);
+      padding: 0.2rem 0.5rem;
+      border: 1px solid rgba(255, 94, 26, 0.35);
+      pointer-events: none;
+      z-index: 10;
+    }
+
     /* Availability badge */
     .availability {
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      margin-top: 1.5rem;
+      margin-top: 0.25rem;
       padding: 0.75rem 1.25rem;
       border: 1px solid rgba(107, 216, 107, 0.25);
       background: rgba(107, 216, 107, 0.05);
@@ -104,7 +143,6 @@
       padding: 2.5rem;
       position: relative;
     }
-    /* accent corner */
     .contact-form-wrapper::before {
       content: '';
       position: absolute;
@@ -125,16 +163,13 @@
     }
     .form-title span { color: var(--accent); }
 
-    /* form grid rows */
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
     }
 
-    /* Shared form-group enhancements */
     .form-group { position: relative; }
-
     .form-group label {
       display: block;
       font-family: var(--font-mono);
@@ -143,13 +178,6 @@
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 0.4rem;
-    }
-
-    /* Animated underline on focus */
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      position: relative;
     }
     .form-group::after {
       content: '';
@@ -162,10 +190,9 @@
     }
     .form-group:focus-within::after { width: 100%; }
 
-    /* Select */
     select option { background: var(--bg2); color: var(--text); }
 
-    /* Thema-chips visual hint */
+    /* Chips */
     .thema-hint {
       display: flex;
       flex-wrap: wrap;
@@ -191,7 +218,6 @@
       background: rgba(255, 94, 26, 0.07);
     }
 
-    /* Submit row */
     .form-submit {
       display: flex;
       align-items: center;
@@ -207,16 +233,11 @@
       line-height: 1.4;
     }
 
-    /* Button loading state */
     .btn-primary[data-loading="true"] {
       opacity: 0.7;
       pointer-events: none;
     }
-    .btn-primary[data-loading="true"]::after {
-      content: ' …';
-    }
 
-    /* Success / Error messages */
     .form-feedback {
       display: none;
       margin-top: 1.5rem;
@@ -281,11 +302,24 @@
           </div>
         </div>
 
-        <div class="info-card">
-          <div class="info-icon">📍</div>
-          <div>
-            <h4>Standort</h4>
-            <p>Schmalkalden, Thüringen<br>Tätig in Schmalkalden · Suhl · Meiningen</p>
+        <!-- Standort mit Maps -->
+        <div class="info-card map-card">
+          <div class="map-card-header">
+            <div class="info-icon">📍</div>
+            <div>
+              <h4>Standort</h4>
+              <p>Schmalkalden, Thüringen<br>Tätig in Schmalkalden · Suhl · Meiningen</p>
+            </div>
+          </div>
+          <div class="map-embed-wrapper">
+            <iframe
+              src="https://maps.google.com/maps?q=Schmalkalden,+Th%C3%BCringen,+Germany&t=&z=12&ie=UTF8&iwloc=&output=embed"
+              title="Standort Schmalkalden"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              aria-label="Google Maps – Schmalkalden, Thüringen">
+            </iframe>
+            <span class="map-badge">Schmalkalden · Thüringen</span>
           </div>
         </div>
 
@@ -317,12 +351,15 @@
     <div class="contact-form-wrapper reveal">
       <div class="form-title">Nachricht <span>senden</span></div>
 
+      <!--
+        Formspree AJAX – kein Redirect.
+        Pflichtfelder: name="name", name="email" (Formspree identifiziert den Absender daran),
+        name="thema", name="nachricht".
+        _subject wird dynamisch mit dem Thema befüllt.
+      -->
       <form id="contactForm" action="https://formspree.io/f/mvzvknqg" method="POST" novalidate>
 
-        <!-- Formspree: Betreff aus Thema zusammensetzen -->
         <input type="hidden" name="_subject" id="hiddenSubject" value="Neue Kontaktanfrage – Olbricht Digital" />
-        <!-- Formspree: nach Absenden auf gleiche Seite zurück (wird via JS abgefangen) -->
-        <input type="hidden" name="_next" value="" />
 
         <div class="form-row">
           <div class="form-group">
@@ -331,7 +368,8 @@
           </div>
           <div class="form-group">
             <label for="email">E-Mail *</label>
-            <input type="email" id="email" name="_replyto" placeholder="max@beispiel.de" required />
+            <!-- name="email" ist für Formspree zwingend erforderlich -->
+            <input type="email" id="email" name="email" placeholder="max@beispiel.de" required />
           </div>
         </div>
 
@@ -345,7 +383,7 @@
             <option value="Unverbindliche Beratung">Unverbindliche Beratung</option>
             <option value="Sonstiges">Sonstiges</option>
           </select>
-          <!-- Schnellauswahl-Chips (setzen das Select) -->
+          <!-- Schnellauswahl-Chips synchronisieren das Select-Feld -->
           <div class="thema-hint" role="group" aria-label="Thema schnell auswählen">
             <span class="thema-chip" data-value="Webseite entwickeln">Webseite</span>
             <span class="thema-chip" data-value="Datenlösung / Schnittstelle">Datenlösung</span>
@@ -408,13 +446,11 @@
         themaSelect.value = val;
         chips.forEach(c => c.classList.remove('active'));
         chip.classList.add('active');
-        // Betreff-Feld mitführen
         document.getElementById('hiddenSubject').value =
           `Kontaktanfrage: ${val} – Olbricht Digital`;
       });
     });
 
-    // Select → Chips sync (falls jemand direkt im Dropdown wählt)
     themaSelect.addEventListener('change', () => {
       chips.forEach(c => {
         c.classList.toggle('active', c.dataset.value === themaSelect.value);
@@ -434,15 +470,13 @@
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
 
-      // HTML5 validation
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
       }
 
-      // Loading state
       submitBtn.dataset.loading = 'true';
-      submitBtn.textContent = 'Wird gesendet';
+      submitBtn.textContent = 'Wird gesendet …';
       successBox.style.display = 'none';
       errorBox.style.display   = 'none';
 
@@ -454,7 +488,6 @@
         });
 
         if (response.ok) {
-          // ✓ Erfolg
           successBox.style.display = 'block';
           form.reset();
           chips.forEach(c => c.classList.remove('active'));
@@ -462,7 +495,7 @@
           submitBtn.textContent = '✓ Gesendet';
           submitBtn.style.pointerEvents = 'none';
         } else {
-          const data = await response.json();
+          const data = await response.json().catch(() => ({}));
           if (data.errors) {
             errorBox.textContent = '✗ ' + data.errors.map(err => err.message).join(', ');
           }
